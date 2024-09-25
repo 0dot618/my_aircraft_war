@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Game{
+    + Game()
+    + action():void
+    + {abstract} changeDifficulty():void
+}
+
+class EasyGame{
+    + EasyGame()
+    + changeDifficulty():void
+}
+
+class MediumGame {
+    + MediumGame()
+    + changeDifficulty():void
+}
+
+class HardGame {
+    + HardGame()
+    + changeDifficulty():void
+}
+
+Game <|-- EasyGame
+Game <|-- MediumGame
+Game <|-- HardGame
+
+@enduml

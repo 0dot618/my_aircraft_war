@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class BombProp {
+    - {static} flyingObjectObserverList:List<FlyingObjectObserver>
+    + BombProp(int locationX, int locationY, int speedX, int speedY)
+    + {static} addFlyingObjectObserver(FlyingObjectObserver objectObserver):void
+    + {static} addFlyingObjectObserver(List<BaseBullet> objectObservers):void
+    + {static} removeFlyingObjectObserver(FlyingObjectObserver objectObserver):void
+    + notifyFlyingObjectObserver():void
+    + propActive(HeroAircraft heroAircraft):void
+}
+
+interface FlyingObjectObserver {
+    + {abstract} update():void
+}
+
+BombProp o--> FlyingObjectObserver
+
+class MobEnemy {
+    + MobEnemy(ShootStrategy shootStrategy,int HP,
+    int speedy)
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+    + vanish():void
+    + update():void
+}
+
+class EliteEnemy {
+    + EliteEnemy(ShootStrategy shootStrategy,int HP,
+    int speedy,int speedx)
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+    + vanish():void
+    + update():void
+}
+
+class ElitePlusEnemy {
+    + ElitePlusEnemy(ShootStrategy shootStrategy,int HP,
+    int speedy,int speedx)
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+    + vanish():void
+    + update():void
+}
+
+class BossEnemy {
+    + BossEnemy(ShootStrategy shootStrategy,int HP,
+    int speedx)
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+    + vanish():void
+    + update():void
+}
+
+class EnemyBullet {
+    + EnemyBullet(int locationX, int locationY,
+    int speedX, int speedY, int power)
+    + vanish():void
+    + update():void
+}
+
+FlyingObjectObserver <|.left. MobEnemy
+FlyingObjectObserver <|.. EliteEnemy
+FlyingObjectObserver <|.. ElitePlusEnemy
+FlyingObjectObserver <|.. BossEnemy
+FlyingObjectObserver <|.right. EnemyBullet
+
+
+@enduml

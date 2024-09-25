@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class HeroAircraft {
+    - shootMode:int
+    - {static} heroAircraft:HeroAircraft
+    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp)
+    + {static} getHeroAircraft():HeroAircraft
+    + getShootMode():int
+    + setShootMode(int shootMode):void
+    + forward():void
+}
+
+HeroAircraft <-- HeroAircraft
+
+@enduml

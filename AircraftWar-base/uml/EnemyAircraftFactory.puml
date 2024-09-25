@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Enemy {
+    # EXP:int
+    + Enemy(ShootStrategy shootStrategy)
+    + forward():void
+    + getEXP():int
+    + {abstract} generateProp(int propLocationX, int propLocationY):List<BaseProp>
+}
+
+class MobEnemy {
+    + MobEnemy(ShootStrategy shootStrategy, int HP, int speedy)
+    + vanish():void
+    + update():void
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+}
+
+class EliteEnemy {
+    + EliteEnemy(ShootStrategy shootStrategy, int HP, int speedy, int speedx)
+    + vanish():void
+    + update():void
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+}
+
+class ElitePlusEnemy {
+    + ElitePlusEnemy(ShootStrategy shootStrategy, int HP, int speedy, int speedx)
+    + vanish():void
+    + update():void
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+}
+
+class BossEnemy {
+    + BossEnemy(ShootStrategy shootStrategy, int HP, int speedx)
+    + vanish():void
+    + update():void
+    + generateProp(int propLocationX, int propLocationY):List<BaseProp>
+}
+
+Enemy <|-up- MobEnemy
+Enemy <|-up- EliteEnemy
+Enemy <|-up- ElitePlusEnemy
+Enemy <|-up- BossEnemy
+
+abstract class EnemyFactory {
+    + {abstract} creatEnemy(int HP,int speedY,int speedX):Enemy
+}
+
+class MobEnemyFactory {
+    + creatEnemy(int HP,int speedY,int speedX):Enemy
+}
+
+class EliteEnemyFactory {
+    + creatEnemy(int HP,int speedY,int speedX):Enemy
+}
+
+class ElitePlusEnemyFactory {
+    + creatEnemy(int HP,int speedY,int speedX):Enemy
+}
+
+class BossEnemyFactory {
+    - bossEnemyHp:int
+    + BossEnemyFactory(int bossEnemyHp)
+    + creatEnemy(int HP,int speedY,int speedX):Enemy
+}
+
+EnemyFactory <|-- MobEnemyFactory
+EnemyFactory <|-- EliteEnemyFactory
+EnemyFactory <|-- ElitePlusEnemyFactory
+EnemyFactory <|-- BossEnemyFactory
+
+MobEnemy <.up. MobEnemyFactory
+EliteEnemy <.up. EliteEnemyFactory
+ElitePlusEnemy <.up. ElitePlusEnemyFactory
+BossEnemy <.up. BossEnemyFactory
+
+
+@enduml

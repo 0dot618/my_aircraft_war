@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ScoreDao {
+    + {abstract} doAdd(Score score):void
+    + {abstract} getAll():String[][]
+    + {abstract} delete(String userName,String mark,String time):void
+}
+
+class Score {
+	- mark:int
+    - userName:String
+    - time:String
+    + Score()
+    + Score(String userName, int mark, String time)
+    + getUserName():String
+    + setUserName(String userName):void
+    + getMark():int
+    + setMark(int mark):void
+    + getTime():String
+    + setTime(String time):void
+}
+
+class ScoreDaoImpl {
+	- scores:List<Score>
+	- pathName:String
+    + ScoreDaoImpl(String difficulty)
+    + doAdd(Score score):void
+    + getAll():String[][]
+    + delete(String userName,String mark,String time):void
+}
+
+class ScoreTable {
+
+}
+
+Score <-right- ScoreDaoImpl
+ScoreDao <|.down. ScoreDaoImpl
+ScoreTable .right.> ScoreDao
+
+
+
+@enduml
